@@ -9,7 +9,7 @@ namespace Inventory1
 		{
 			var mobilePhoneList= mobilePhoneListGenerator();
 			var vehicleList = vehicleListGenerator();
-			Console.WriteLine(vehicleList[0].SerialNumber);
+			var personalComputerList = personalComputerListGenerator();
 
 
 
@@ -41,7 +41,20 @@ namespace Inventory1
 			vehicleList.Add(vehicle1);
 			vehicleList.Add(vehicle2);
 			return vehicleList;
+		}
 
+		public static List<PersonalComputer> personalComputerListGenerator()
+		{
+			var personalComputerList = new List<PersonalComputer>();
+			var personalComputer1Date= new DateTime(2005,23,4);
+			var personalComputer2Date= new DateTime(2009,11,6);
+			var personalComputer1 = new PersonalComputer(Guid.NewGuid(),"Made of premium plastic",personalComputer1Date,30,15000,
+				"Asus",true,"Linux",true);
+			var personalComputer2 = new PersonalComputer(Guid.NewGuid(),"Brand new watercooling housing system",personalComputer2Date,
+				12,11132.123,"Intel",false,"Windows",false);
+			personalComputerList.Add(personalComputer1);
+			personalComputerList.Add(personalComputer2);
+			return personalComputerList;
 		}
 	}
 	
