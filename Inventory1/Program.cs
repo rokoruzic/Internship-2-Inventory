@@ -212,6 +212,59 @@ namespace Inventory1
 						}
 					}
 				}
+				else if (menuNumber == 4)
+				{
+					Console.WriteLine("Type serial number of desired inventory item");
+					var serialNumberSearch = Guid.Parse(Console.ReadLine());
+					for (int i = 0; i < personalComputerList.Count; i++)
+					{
+						if (serialNumberSearch == personalComputerList[i].SerialNumber)
+						{
+							Console.WriteLine(
+								$"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
+								$"description: {personalComputerList[i].Description}" + "\n" +
+								$"date of purchase: {personalComputerList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {personalComputerList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {personalComputerList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {personalComputerList[i].Manufacturer}" + "\n" +
+								$"batteries : {personalComputerList[i].Batteries}" + "\n" +
+								$"operating system : {personalComputerList[i].OperatingSystem}" + "\n" +
+								$"portable: {personalComputerList[i].Portable}");
+						}
+					}
+
+					for (int i = 0; i < mobilePhoneList.Count; i++)
+					{
+						if (serialNumberSearch == mobilePhoneList[i].SerialNumber)
+						{
+							Console.WriteLine(
+								$"serial number: {mobilePhoneList[i].SerialNumber}" + "\n" +
+								$"description: {mobilePhoneList[i].Description}" + "\n" +
+								$"date of purchase: {mobilePhoneList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {mobilePhoneList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {mobilePhoneList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {mobilePhoneList[i].Manufacturer}" + "\n" +
+								$"batteries : {mobilePhoneList[i].Batteries}" + "\n" +
+								$"mobile phone number : {mobilePhoneList[i].MobileNumber}" + "\n" +
+								$"owner's name: {mobilePhoneList[i].OwnerName}");
+						}
+					}
+					for (int i = 0; i < vehicleList.Count; i++)
+					{
+						if (serialNumberSearch == vehicleList[i].SerialNumber)
+						{
+							Console.WriteLine(
+								$"serial number: {vehicleList[i].SerialNumber}" + "\n" +
+								$"description: {vehicleList[i].Description}" + "\n" +
+								$"date of purchase: {vehicleList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {vehicleList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {vehicleList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {vehicleList[i].Manufacturer}" + "\n" +
+								$"registration expire date : {vehicleList[i].RegistrationExpireDate}" + "\n" +
+								$"kilometres passed: {vehicleList[i].KilometresPassed}");
+						}
+					}
+				}
 			}
 			while (menuNumber >= 1 && menuNumber <= 10);
 
