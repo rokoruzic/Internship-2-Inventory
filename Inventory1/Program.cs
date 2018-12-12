@@ -7,18 +7,87 @@ namespace Inventory1
 	{
 		static void Main(string[] args)
 		{
-			var mobilePhoneList= mobilePhoneListGenerator();
+			var mobilePhoneList = mobilePhoneListGenerator();
 			var vehicleList = vehicleListGenerator();
 			var personalComputerList = personalComputerListGenerator();
-			menu();
+			int menuNumber;
+			do
+			{
+				menu();
+				menuNumber = int.Parse(Console.ReadLine());
+				if (menuNumber == 1)
+				{
+					Console.WriteLine("Type 'delete' if you want to delete personal computer");
+					Console.WriteLine("Type 'add' if you want to add personal computer");
+					var addOrDelete = Console.ReadLine();
+					if (addOrDelete == "add")
+					{
+						Console.WriteLine("Type serial number");
+						var serialNumberGuid = Guid.Parse(Console.ReadLine());
+						Console.WriteLine("Type description");
+						var description = Console.ReadLine();
+						Console.WriteLine("Type year of purchase");
+						var year = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type month of purchase");
+						var month = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type day of purchase");
+						var day = int.Parse(Console.ReadLine());
+						var dateOfPurchase = new DateTime(year, month, day);
+						Console.WriteLine("Type remaining warranty in months");
+						var warrantyMonths = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type buying price");
+						var price = double.Parse(Console.ReadLine());
+						Console.WriteLine("Type manufacturer");
+						var manufacturer = Console.ReadLine();
+						Console.WriteLine("Do this computer have batteries, type true if yes, type false if no");
+						bool batteries = bool.Parse(Console.ReadLine());
+						Console.WriteLine("Type operating system of pc");
+						var operatingSystem = Console.ReadLine();
+						Console.WriteLine("Is this PC portable? if yes type true, if no type false");
+						bool portable = bool.Parse(Console.ReadLine());
+						var personalComputer= new PersonalComputer(serialNumberGuid,description,dateOfPurchase,warrantyMonths,
+							price,manufacturer,batteries,operatingSystem,portable);
+						personalComputerList.Add(personalComputer);
+					}
+					else if (addOrDelete == "delete")
+					{
+						for (int i = 0; i < personalComputerList.Count; i++)
+						{
+							Console.WriteLine(
+								$"{i + 1}" + "\n"+ $"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
+								$"description: {personalComputerList[i].Description}" + "\n" +
+								$"date of purchase: {personalComputerList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {personalComputerList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {personalComputerList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {personalComputerList[i].Manufacturer}" + "\n" +
+								$"batteries : {personalComputerList[i].Batteries}" + "\n" +
+								$"operating system : {personalComputerList[i].OperatingSystem}" + "\n" +
+								$"portable: {personalComputerList[i].Portable}");
+						}
 
-
-
+						Console.WriteLine("Type ordinal number that represents PC which you want to delete");
+						var listOrdinalNumber = int.Parse(Console.ReadLine());
+						if (listOrdinalNumber > personalComputerList.Count + 1)
+						{
+							Console.WriteLine("That ordinal number doesnt exist");
+						}
+						else
+						{
+						personalComputerList.RemoveAt(listOrdinalNumber - 1);
+							Console.WriteLine("Personal Computer Deleted ");
+						}
+					}
+					else
+						Console.WriteLine("Wrong command");
+				}
+			}
+			while (menuNumber >= 1 && menuNumber<=10);
+				Console.WriteLine("End program");
 		}
 		public static List<MobilePhone> mobilePhoneListGenerator()
 		{
 			var mobilePhoneList = new List<MobilePhone>();
-			var mobilePhone1Date = new DateTime(2007, 12, 1);
+			var mobilePhone1Date = new DateTime(2007, 12,1);
 			var mobilePhone2Date = new DateTime(2009, 1, 23);
 			var mobilePhone1 = new MobilePhone(Guid.NewGuid(), "White model with new gorilla glass",
 				mobilePhone1Date, 20, 3020.123, "Samsung", true, "0958157124", "ivo sivo");
@@ -60,6 +129,7 @@ namespace Inventory1
 
 		public static void menu()
 		{
+			Console.WriteLine(" ");
 			Console.WriteLine("Read carefully what do you want to do in menu. When you choose the action, " +
 			                  " type in ordinal number which represents wanted action");
 			Console.WriteLine("1. Delete or add new personal computer ");
