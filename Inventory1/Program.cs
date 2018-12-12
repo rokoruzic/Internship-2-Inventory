@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 
 namespace Inventory1
 {
@@ -265,6 +266,29 @@ namespace Inventory1
 						}
 					}
 				}
+				else if (menuNumber == 5)
+				{
+					Console.WriteLine("Type in year to find out which PC's warranty expires that year");
+					var searchYear = int.Parse(Console.ReadLine());
+					var YearDate = new DateTime(searchYear,1,1);
+					for (int i = 0; i < personalComputerList.Count; i++)
+					{
+						if (personalComputerList[i].DateOfPurchase
+							    .AddMonths(personalComputerList[i].WarrantyInMonths).Year == YearDate.Year)
+						{
+							Console.WriteLine(
+								$"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
+								$"description: {personalComputerList[i].Description}" + "\n" +
+								$"date of purchase: {personalComputerList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {personalComputerList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {personalComputerList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {personalComputerList[i].Manufacturer}" + "\n" +
+								$"batteries : {personalComputerList[i].Batteries}" + "\n" +
+								$"operating system : {personalComputerList[i].OperatingSystem}" + "\n" +
+								$"portable: {personalComputerList[i].Portable}");
+						}
+					}
+				}
 			}
 			while (menuNumber >= 1 && menuNumber <= 10);
 
@@ -304,7 +328,7 @@ namespace Inventory1
 			var personalComputerList = new List<PersonalComputer>();
 			var personalComputer1Date= new DateTime(2005,7,4);
 			var personalComputer2Date= new DateTime(2009,11,6);
-			var personalComputer1 = new PersonalComputer(Guid.NewGuid(),"Made of premium plastic",personalComputer1Date,30,15000,
+			var personalComputer1 = new PersonalComputer(Guid.NewGuid(),"Made of premium plastic",personalComputer1Date,24,15000,
 				"Asus",true,"Linux",true);
 			var personalComputer2 = new PersonalComputer(Guid.NewGuid(),"Brand new watercooling housing system",personalComputer2Date,
 				12,11132.123,"Intel",false,"Windows",false);
@@ -330,4 +354,5 @@ namespace Inventory1
 
 		}
 	}
+	
 }
