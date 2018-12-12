@@ -10,6 +10,7 @@ namespace Inventory1
 			var mobilePhoneList= mobilePhoneListGenerator();
 			var vehicleList = vehicleListGenerator();
 			var personalComputerList = personalComputerListGenerator();
+			menu();
 
 
 
@@ -46,7 +47,7 @@ namespace Inventory1
 		public static List<PersonalComputer> personalComputerListGenerator()
 		{
 			var personalComputerList = new List<PersonalComputer>();
-			var personalComputer1Date= new DateTime(2005,23,4);
+			var personalComputer1Date= new DateTime(2005,7,4);
 			var personalComputer2Date= new DateTime(2009,11,6);
 			var personalComputer1 = new PersonalComputer(Guid.NewGuid(),"Made of premium plastic",personalComputer1Date,30,15000,
 				"Asus",true,"Linux",true);
@@ -55,6 +56,23 @@ namespace Inventory1
 			personalComputerList.Add(personalComputer1);
 			personalComputerList.Add(personalComputer2);
 			return personalComputerList;
+		}
+
+		public static void menu()
+		{
+			Console.WriteLine("Read carefully what do you want to do in menu. When you choose the action, " +
+			                  " type in ordinal number which represents wanted action");
+			Console.WriteLine("1. Delete or add new personal computer ");
+			Console.WriteLine("2. Delete or add new Mobile phone ");
+			Console.WriteLine("3. Delete or add new vehicle ");
+			Console.WriteLine("4. Search through whole inventory with desired product serial number and get product info");
+			Console.WriteLine("5. Search trough personal computer inventory with desired warranty expire year");
+			Console.WriteLine("6. Search how many tech equipment have batteries");
+			Console.WriteLine("7. Search through mobile phone inventory with desired mobilephone brand ");
+			Console.WriteLine("8. Search through personal computer inventory with desired operating system");
+			Console.WriteLine("9. Search through mobile phone inventory with desired warranty expire year");
+			Console.WriteLine("10. Print all vehicles which registration expires in next month");
+			
 		}
 	}
 	
