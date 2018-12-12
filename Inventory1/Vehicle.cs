@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Inventory1
 {
-	public class Vehicle:Inventory
+	public class Vehicle:InventoryItem
 	{
 		public double KilometresPassed { get; set; }
 		public DateTime RegistrationExpireDate { get; set; }

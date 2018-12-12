@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Inventory1
 {
-	public class TechEquipment:Inventory
+	public class TechEquipment:InventoryItem
 	{
 		public bool Batteries { get; set; }
 		public TechEquipment(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyInMonths,

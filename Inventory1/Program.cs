@@ -45,8 +45,9 @@ namespace Inventory1
 						var operatingSystem = Console.ReadLine();
 						Console.WriteLine("Is this PC portable? if yes type true, if no type false");
 						bool portable = bool.Parse(Console.ReadLine());
-						var personalComputer= new PersonalComputer(serialNumberGuid,description,dateOfPurchase,warrantyMonths,
-							price,manufacturer,batteries,operatingSystem,portable);
+						var personalComputer = new PersonalComputer(serialNumberGuid, description, dateOfPurchase,
+							warrantyMonths,
+							price, manufacturer, batteries, operatingSystem, portable);
 						personalComputerList.Add(personalComputer);
 					}
 					else if (addOrDelete == "delete")
@@ -54,7 +55,7 @@ namespace Inventory1
 						for (int i = 0; i < personalComputerList.Count; i++)
 						{
 							Console.WriteLine(
-								$"{i + 1}" + "\n"+ $"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
+								$"{i + 1}" + "\n" + $"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
 								$"description: {personalComputerList[i].Description}" + "\n" +
 								$"date of purchase: {personalComputerList[i].DateOfPurchase} " + "\n" +
 								$"remaining warranty: {personalComputerList[i].WarrantyInMonths}" + "\n" +
@@ -73,16 +74,148 @@ namespace Inventory1
 						}
 						else
 						{
-						personalComputerList.RemoveAt(listOrdinalNumber - 1);
+							personalComputerList.RemoveAt(listOrdinalNumber - 1);
 							Console.WriteLine("Personal Computer Deleted ");
 						}
 					}
+
 					else
 						Console.WriteLine("Wrong command");
 				}
+				else if (menuNumber == 2)
+				{
+					Console.WriteLine("Type 'delete' if you want to delete mobile phone");
+					Console.WriteLine("Type 'add' if you want to add mobile phone");
+					var addOrDelete = Console.ReadLine();
+					if (addOrDelete == "add")
+					{
+						Console.WriteLine("Type serial number");
+						var serialNumberGuid = Guid.Parse(Console.ReadLine());
+						Console.WriteLine("Type description");
+						var description = Console.ReadLine();
+						Console.WriteLine("Type year of purchase");
+						var year = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type month of purchase");
+						var month = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type day of purchase");
+						var day = int.Parse(Console.ReadLine());
+						var dateOfPurchase = new DateTime(year, month, day);
+						Console.WriteLine("Type remaining warranty in months");
+						var warrantyMonths = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type buying price");
+						var price = double.Parse(Console.ReadLine());
+						Console.WriteLine("Type manufacturer");
+						var manufacturer = Console.ReadLine();
+						Console.WriteLine("Does this mobile phone have batteries, type true if yes, type false if no");
+						bool batteries = bool.Parse(Console.ReadLine());
+						Console.WriteLine("Type mobile number");
+						var mobileNumber = Console.ReadLine();
+						Console.WriteLine("Type owner's name");
+						var ownerName = Console.ReadLine();
+						var mobilePhone = new MobilePhone(serialNumberGuid, description, dateOfPurchase,
+							warrantyMonths,
+							price, manufacturer, batteries, mobileNumber, ownerName);
+						mobilePhoneList.Add(mobilePhone);
+					}
+					else if (addOrDelete == "delete")
+					{
+						for (int i = 0; i < mobilePhoneList.Count; i++)
+						{
+							Console.WriteLine(
+								$"{i + 1}" + "\n" + $"serial number: {mobilePhoneList[i].SerialNumber}" + "\n" +
+								$"description: {mobilePhoneList[i].Description}" + "\n" +
+								$"date of purchase: {mobilePhoneList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {mobilePhoneList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {mobilePhoneList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {mobilePhoneList[i].Manufacturer}" + "\n" +
+								$"batteries : {mobilePhoneList[i].Batteries}" + "\n" +
+								$"mobile phone number : {mobilePhoneList[i].MobileNumber}" + "\n" +
+								$"owner's name: {mobilePhoneList[i].OwnerName}");
+						}
+
+						Console.WriteLine("Type ordinal number that represents mobile phone which you want to delete");
+						var listOrdinalNumber = int.Parse(Console.ReadLine());
+						if (listOrdinalNumber > mobilePhoneList.Count + 1)
+						{
+							Console.WriteLine("That ordinal number doesnt exist");
+						}
+						else
+						{
+							mobilePhoneList.RemoveAt(listOrdinalNumber - 1);
+							Console.WriteLine("Mobile phone deleted.");
+						}
+					}
+				}
+				else if (menuNumber == 3)
+				{
+					Console.WriteLine("Type 'delete' if you want to vehicle");
+					Console.WriteLine("Type 'add' if you want to add vehicle");
+					var addOrDelete = Console.ReadLine();
+					if (addOrDelete == "add")
+					{
+						Console.WriteLine("Type serial number");
+						var serialNumberGuid = Guid.Parse(Console.ReadLine());
+						Console.WriteLine("Type description");
+						var description = Console.ReadLine();
+						Console.WriteLine("Type year of purchase");
+						var year = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type month of purchase");
+						var month = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type day of purchase");
+						var day = int.Parse(Console.ReadLine());
+						var dateOfPurchase = new DateTime(year, month, day);
+						Console.WriteLine("Type remaining warranty in months");
+						var warrantyMonths = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type buying price");
+						var price = double.Parse(Console.ReadLine());
+						Console.WriteLine("Type manufacturer");
+						var manufacturer = Console.ReadLine();
+						Console.WriteLine("Type year of registration expire date");
+						var regYear = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type month of registration expire date");
+						var regMonth = int.Parse(Console.ReadLine());
+						Console.WriteLine("Type day of registration expire date");
+						var regDay = int.Parse(Console.ReadLine());
+						var registrationExpireDate = new DateTime(regYear,regMonth,regDay);
+						Console.WriteLine("Type kilometres passed with vehicle");
+						var kilometresPassed = double.Parse(Console.ReadLine());
+						var vehicle = new Vehicle(serialNumberGuid, description, dateOfPurchase,
+							warrantyMonths,
+							price, manufacturer, registrationExpireDate, kilometresPassed);
+						vehicleList.Add(vehicle);
+					}
+					else if (addOrDelete == "delete")
+					{
+						for (int i = 0; i <vehicleList.Count; i++)
+						{
+							Console.WriteLine(
+								$"{i + 1}" + "\n" + $"serial number: {vehicleList[i].SerialNumber}" + "\n" +
+								$"description: {vehicleList[i].Description}" + "\n" +
+								$"date of purchase: {vehicleList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {vehicleList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {vehicleList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {vehicleList[i].Manufacturer}" + "\n" +
+								$"registration expire date : {vehicleList[i].RegistrationExpireDate}" + "\n" +
+								$"kilometres passed: {vehicleList[i].KilometresPassed}");
+						}
+
+						Console.WriteLine("Type ordinal number that represents vehicle which you want to delete");
+						var listOrdinalNumber = int.Parse(Console.ReadLine());
+						if (listOrdinalNumber > vehicleList.Count + 1)
+						{
+							Console.WriteLine("That ordinal number doesnt exist");
+						}
+						else
+						{
+							vehicleList.RemoveAt(listOrdinalNumber - 1);
+							Console.WriteLine("vehicle deleted.");
+						}
+					}
+				}
 			}
-			while (menuNumber >= 1 && menuNumber<=10);
-				Console.WriteLine("End program");
+			while (menuNumber >= 1 && menuNumber <= 10);
+
+			Console.WriteLine("End program");
 		}
 		public static List<MobilePhone> mobilePhoneListGenerator()
 		{
@@ -126,7 +259,6 @@ namespace Inventory1
 			personalComputerList.Add(personalComputer2);
 			return personalComputerList;
 		}
-
 		public static void menu()
 		{
 			Console.WriteLine(" ");
@@ -142,11 +274,7 @@ namespace Inventory1
 			Console.WriteLine("8. Search through personal computer inventory with desired operating system");
 			Console.WriteLine("9. Search through mobile phone inventory with desired warranty expire year");
 			Console.WriteLine("10. Print all vehicles which registration expires in next month");
-			
+
 		}
 	}
-	
-
-
-	
 }
