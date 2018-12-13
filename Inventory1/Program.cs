@@ -293,6 +293,7 @@ namespace Inventory1
 							    .AddMonths(personalComputerList[i].WarrantyInMonths).Year == YearDate.Year)
 						{
 							Console.WriteLine(
+								$"{i + 1}" + "\n" +
 								$"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
 								$"description: {personalComputerList[i].Description}" + "\n" +
 								$"date of purchase: {personalComputerList[i].DateOfPurchase} " + "\n" +
@@ -334,6 +335,7 @@ namespace Inventory1
 						if (mobilePhoneList[i].Manufacturer == manufacterSearchEnum)
 						{
 						Console.WriteLine(
+							$"{i + 1}" + "\n" +
 							$"serial number: {mobilePhoneList[i].SerialNumber}" + "\n" +
 							$"description: {mobilePhoneList[i].Description}" + "\n" +
 							$"date of purchase: {mobilePhoneList[i].DateOfPurchase} " + "\n" +
@@ -359,6 +361,7 @@ namespace Inventory1
 					{
 						if(personalComputerList[i].OperatingSystem==operatingSystemSearchEnum)
 							Console.WriteLine(
+								$"{i + 1}" + "\n" +
 								$"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
 								$"description: {personalComputerList[i].Description}" + "\n" +
 								$"date of purchase: {personalComputerList[i].DateOfPurchase} " + "\n" +
@@ -369,6 +372,61 @@ namespace Inventory1
 								$"operating system : {personalComputerList[i].OperatingSystem}" + "\n" +
 								$"portable: {personalComputerList[i].Portable}");
 					}
+				}
+				else if (menuNumber == 9)
+				{
+					Console.WriteLine("Type in year to find out which mobile phone's warranty expires that year");
+					var searchYear = int.Parse(Console.ReadLine());
+					var YearDate = new DateTime(searchYear, 1, 1);
+					for (int i = 0; i < mobilePhoneList.Count; i++)
+					{
+						if (mobilePhoneList[i].DateOfPurchase
+							    .AddMonths(mobilePhoneList[i].WarrantyInMonths).Year == YearDate.Year)
+						{
+							Console.WriteLine(
+								$"{i + 1}" + "\n" +
+								$"mobile phone number : {mobilePhoneList[i].MobileNumber}" + "\n" +
+								$"owner's name: {mobilePhoneList[i].OwnerName}");
+						}
+					}
+				}
+				else if (menuNumber == 10)
+				{
+					Console.WriteLine("Vehicles which registration licence expires next month:");
+					var localDate = DateTime.Now;
+					for (int i = 0; i < vehicleList.Count; i++)
+					{
+						if (localDate.Month == 12 && vehicleList[i].RegistrationExpireDate.Year == localDate.Year+1
+							 &&
+							vehicleList[i].RegistrationExpireDate.Month == 1)
+						{
+							Console.WriteLine(
+								$"serial number: {vehicleList[i].SerialNumber}" + "\n" +
+								$"description: {vehicleList[i].Description}" + "\n" +
+								$"date of purchase: {vehicleList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {vehicleList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {vehicleList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {vehicleList[i].Manufacturer}" + "\n" +
+								$"registration expire date : {vehicleList[i].RegistrationExpireDate}" + "\n" +
+								$"kilometres passed: {vehicleList[i].KilometresPassed}");
+						}
+
+						else if (vehicleList[i].RegistrationExpireDate.Month ==localDate.Month+1)
+
+						{
+							Console.WriteLine(
+								$"serial number: {vehicleList[i].SerialNumber}" + "\n" +
+								$"description: {vehicleList[i].Description}" + "\n" +
+								$"date of purchase: {vehicleList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {vehicleList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {vehicleList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {vehicleList[i].Manufacturer}" + "\n" +
+								$"registration expire date : {vehicleList[i].RegistrationExpireDate}" + "\n" +
+								$"kilometres passed: {vehicleList[i].KilometresPassed}");
+						}
+					}
+
+					
 				}
 			}
 			while (menuNumber >= 1 && menuNumber <= 10);
@@ -393,12 +451,12 @@ namespace Inventory1
 		{
 			var vehicleList = new List<Vehicle>();
 			var vehicle1DateOfPurchase = new DateTime(2000, 1, 1);
-			var vehicle1DateOfRegExpire = new DateTime(2015, 12, 1);
+			var vehicle1DateOfRegExpire = new DateTime(2019, 1, 1);
 			var vehicle2DateOfPurchase = new DateTime(1965, 11, 8);
-			var vehicle2DateOfRegExpire = new DateTime(2012, 6, 19);
+			var vehicle2DateOfRegExpire = new DateTime(2019, 6, 19);
 			var vehicle1 = new Vehicle(Guid.NewGuid(), "Metallic black car with blue neons", vehicle1DateOfPurchase, 1,
 				100000, Manufacturer.Ferrari,
-				vehicle2DateOfRegExpire, 525000);
+				vehicle1DateOfRegExpire, 525000);
 			var vehicle2 = new Vehicle(Guid.NewGuid(), "Gray timemachine with fancy doors", vehicle2DateOfPurchase, 52,
 				123456789,
 				Manufacturer.DeLorean, vehicle2DateOfRegExpire, 5788000);
@@ -438,7 +496,6 @@ namespace Inventory1
 			Console.WriteLine("9. Search through mobile phone inventory with desired warranty expire year");
 			Console.WriteLine("10. Print all vehicles which registration expires in next month");
 		}
-		
 	}
 }
 	
