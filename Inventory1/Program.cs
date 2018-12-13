@@ -38,17 +38,27 @@ namespace Inventory1
 						var warrantyMonths = int.Parse(Console.ReadLine());
 						Console.WriteLine("Type buying price");
 						var price = double.Parse(Console.ReadLine());
-						Console.WriteLine("Type manufacturer");
-						var manufacturer = Console.ReadLine();
+						Console.WriteLine("Select manufacturer by typing ordinal number which represents it");
+						Console.WriteLine($"{(int) Manufacturer.Asus} {Manufacturer.Asus}");
+						Console.WriteLine($"{(int) Manufacturer.Toshiba} {Manufacturer.Toshiba}");
+						Console.WriteLine($"{(int) Manufacturer.HP} {Manufacturer.HP}");
+						Console.WriteLine($"{(int) Manufacturer.Dell} {Manufacturer.Dell}");
+						Console.WriteLine($"{(int) Manufacturer.Intel} {Manufacturer.Intel}");
+						var manufacturer = int.Parse(Console.ReadLine());
+						Manufacturer manufacturerPC = (Manufacturer)manufacturer;
 						Console.WriteLine("Do this computer have batteries, type true if yes, type false if no");
 						bool batteries = bool.Parse(Console.ReadLine());
-						Console.WriteLine("Type operating system of pc");
-						var operatingSystem = Console.ReadLine();
+						Console.WriteLine("Select operating system by typing ordinal number which represents it");
+						Console.WriteLine($"{(int)OperatingSystem.Windows} {OperatingSystem.Windows}");
+						Console.WriteLine($"{(int)OperatingSystem.Linux} {OperatingSystem.Linux}");
+						Console.WriteLine($"{(int)OperatingSystem.MacOS} {OperatingSystem.MacOS}");
+						var operatingSystem = int.Parse(Console.ReadLine());
+						OperatingSystem operatingSystemPC = (OperatingSystem) operatingSystem;
 						Console.WriteLine("Is this PC portable? if yes type true, if no type false");
 						bool portable = bool.Parse(Console.ReadLine());
 						var personalComputer = new PersonalComputer(serialNumberGuid, description, dateOfPurchase,
 							warrantyMonths,
-							price, manufacturer, batteries, operatingSystem, portable);
+							price, manufacturerPC, batteries, operatingSystemPC, portable);
 						personalComputerList.Add(personalComputer);
 					}
 					else if (addOrDelete == "delete")
@@ -105,8 +115,13 @@ namespace Inventory1
 						var warrantyMonths = int.Parse(Console.ReadLine());
 						Console.WriteLine("Type buying price");
 						var price = double.Parse(Console.ReadLine());
-						Console.WriteLine("Type manufacturer");
-						var manufacturer = Console.ReadLine();
+						Console.WriteLine("Select manufacturer by typing ordinal number which represents it");
+						Console.WriteLine($"{(int)Manufacturer.Alcatel} {Manufacturer.Alcatel}");
+						Console.WriteLine($"{(int)Manufacturer.LG} {Manufacturer.LG}");
+						Console.WriteLine($"{(int)Manufacturer.Samsung} {Manufacturer.Samsung}");
+						Console.WriteLine($"{(int)Manufacturer.Nokia} {Manufacturer.Nokia}");
+						var manufacturer = int.Parse(Console.ReadLine());
+						Manufacturer manufacturerMobilePhone = (Manufacturer)manufacturer;
 						Console.WriteLine("Does this mobile phone have batteries, type true if yes, type false if no");
 						bool batteries = bool.Parse(Console.ReadLine());
 						Console.WriteLine("Type mobile number");
@@ -115,7 +130,7 @@ namespace Inventory1
 						var ownerName = Console.ReadLine();
 						var mobilePhone = new MobilePhone(serialNumberGuid, description, dateOfPurchase,
 							warrantyMonths,
-							price, manufacturer, batteries, mobileNumber, ownerName);
+							price, manufacturerMobilePhone, batteries, mobileNumber, ownerName);
 						mobilePhoneList.Add(mobilePhone);
 					}
 					else if (addOrDelete == "delete")
@@ -133,7 +148,6 @@ namespace Inventory1
 								$"mobile phone number : {mobilePhoneList[i].MobileNumber}" + "\n" +
 								$"owner's name: {mobilePhoneList[i].OwnerName}");
 						}
-
 						Console.WriteLine("Type ordinal number that represents mobile phone which you want to delete");
 						var listOrdinalNumber = int.Parse(Console.ReadLine());
 						if (listOrdinalNumber > mobilePhoneList.Count + 1)
@@ -169,8 +183,12 @@ namespace Inventory1
 						var warrantyMonths = int.Parse(Console.ReadLine());
 						Console.WriteLine("Type buying price");
 						var price = double.Parse(Console.ReadLine());
-						Console.WriteLine("Type manufacturer");
-						var manufacturer = Console.ReadLine();
+						Console.WriteLine("Select manufacturer by typing ordinal number which represents it");
+						Console.WriteLine($"{(int)Manufacturer.Ferrari} {Manufacturer.Ferrari}");
+						Console.WriteLine($"{(int)Manufacturer.DeLorean} {Manufacturer.DeLorean}");
+						Console.WriteLine($"{(int)Manufacturer.Renault} {Manufacturer.Renault}");
+						var manufacturer = int.Parse(Console.ReadLine());
+						Manufacturer manufacturerVehicle = (Manufacturer)manufacturer;
 						Console.WriteLine("Type year of registration expire date");
 						var regYear = int.Parse(Console.ReadLine());
 						Console.WriteLine("Type month of registration expire date");
@@ -182,7 +200,7 @@ namespace Inventory1
 						var kilometresPassed = double.Parse(Console.ReadLine());
 						var vehicle = new Vehicle(serialNumberGuid, description, dateOfPurchase,
 							warrantyMonths,
-							price, manufacturer, registrationExpireDate, kilometresPassed);
+							price, manufacturerVehicle, registrationExpireDate, kilometresPassed);
 						vehicleList.Add(vehicle);
 					}
 					else if (addOrDelete == "delete")
@@ -199,7 +217,6 @@ namespace Inventory1
 								$"registration expire date : {vehicleList[i].RegistrationExpireDate}" + "\n" +
 								$"kilometres passed: {vehicleList[i].KilometresPassed}");
 						}
-
 						Console.WriteLine("Type ordinal number that represents vehicle which you want to delete");
 						var listOrdinalNumber = int.Parse(Console.ReadLine());
 						if (listOrdinalNumber > vehicleList.Count + 1)
@@ -303,6 +320,56 @@ namespace Inventory1
 					}
 					Console.WriteLine($"there are {batteriesCount} of tech equipment with batteries");
 				}
+				else if (menuNumber == 7)
+				{
+					Console.WriteLine("Type manufacturer you want to search within mobilephone base( First letter must be uppercase,others lowercase)");
+					Console.WriteLine(Manufacturer.Alcatel);
+					Console.WriteLine(Manufacturer.LG);
+					Console.WriteLine(Manufacturer.Samsung);
+					Console.WriteLine(Manufacturer.Nokia);
+					var manufacterSearch = Console.ReadLine();
+					Manufacturer manufacterSearchEnum = (Manufacturer)Enum.Parse(typeof(Manufacturer), manufacterSearch);
+					for ( int i = 0; i<mobilePhoneList.Count;i++)
+					{
+						if (mobilePhoneList[i].Manufacturer == manufacterSearchEnum)
+						{
+						Console.WriteLine(
+							$"serial number: {mobilePhoneList[i].SerialNumber}" + "\n" +
+							$"description: {mobilePhoneList[i].Description}" + "\n" +
+							$"date of purchase: {mobilePhoneList[i].DateOfPurchase} " + "\n" +
+							$"remaining warranty: {mobilePhoneList[i].WarrantyInMonths}" + "\n" +
+							$"buying price: {mobilePhoneList[i].PriceWhenBought} " + "\n" +
+							$"manufacturer: {mobilePhoneList[i].Manufacturer}" + "\n" +
+							$"batteries : {mobilePhoneList[i].Batteries}" + "\n" +
+							$"mobile phone number : {mobilePhoneList[i].MobileNumber}" + "\n" +
+							$"owner's name: {mobilePhoneList[i].OwnerName}");
+						}
+					}
+				}
+				else if (menuNumber == 8)
+				{
+					Console.WriteLine("Type operating system you want to search within PC base(First letter must be uppercase,others lowercase)");
+					Console.WriteLine(OperatingSystem.Windows);
+					Console.WriteLine(OperatingSystem.Linux);
+					Console.WriteLine(OperatingSystem.MacOS);
+					var operatingSystemSearch = Console.ReadLine();
+					OperatingSystem operatingSystemSearchEnum =
+						(OperatingSystem) Enum.Parse(typeof(OperatingSystem), operatingSystemSearch);
+					for (int i = 0; i < personalComputerList.Count; i++)
+					{
+						if(personalComputerList[i].OperatingSystem==operatingSystemSearchEnum)
+							Console.WriteLine(
+								$"serial number: {personalComputerList[i].SerialNumber}" + "\n" +
+								$"description: {personalComputerList[i].Description}" + "\n" +
+								$"date of purchase: {personalComputerList[i].DateOfPurchase} " + "\n" +
+								$"remaining warranty: {personalComputerList[i].WarrantyInMonths}" + "\n" +
+								$"buying price: {personalComputerList[i].PriceWhenBought} " + "\n" +
+								$"manufacturer: {personalComputerList[i].Manufacturer}" + "\n" +
+								$"batteries : {personalComputerList[i].Batteries}" + "\n" +
+								$"operating system : {personalComputerList[i].OperatingSystem}" + "\n" +
+								$"portable: {personalComputerList[i].Portable}");
+					}
+				}
 			}
 			while (menuNumber >= 1 && menuNumber <= 10);
 			Console.WriteLine("End program");
@@ -313,8 +380,8 @@ namespace Inventory1
 			var mobilePhone1Date = new DateTime(2007, 12, 1);
 			var mobilePhone2Date = new DateTime(2009, 1, 23);
 			var mobilePhone1 = new MobilePhone(Guid.NewGuid(), "White model with new gorilla glass",
-				mobilePhone1Date, 20, 3020.123, "Samsung", false, "0958157124", "ivo sivo");
-			var mobilePhone2 = new MobilePhone(Guid.NewGuid(), "Old used phone", mobilePhone2Date, 2, 123, "Alcatel",
+				mobilePhone1Date, 20, 3020.123, Manufacturer.Samsung, false, "0958157124", "ivo sivo");
+			var mobilePhone2 = new MobilePhone(Guid.NewGuid(), "Old used phone", mobilePhone2Date, 2, 123, Manufacturer.Alcatel,
 				false,
 				"091234234", "Vojko Vrucina");
 			mobilePhoneList.Add(mobilePhone1);
@@ -330,11 +397,11 @@ namespace Inventory1
 			var vehicle2DateOfPurchase = new DateTime(1965, 11, 8);
 			var vehicle2DateOfRegExpire = new DateTime(2012, 6, 19);
 			var vehicle1 = new Vehicle(Guid.NewGuid(), "Metallic black car with blue neons", vehicle1DateOfPurchase, 1,
-				100000, "Ferrari",
+				100000, Manufacturer.Ferrari,
 				vehicle2DateOfRegExpire, 525000);
 			var vehicle2 = new Vehicle(Guid.NewGuid(), "Gray timemachine with fancy doors", vehicle2DateOfPurchase, 52,
 				123456789,
-				"DeLorean", vehicle2DateOfRegExpire, 5788000);
+				Manufacturer.DeLorean, vehicle2DateOfRegExpire, 5788000);
 			vehicleList.Add(vehicle1);
 			vehicleList.Add(vehicle2);
 			return vehicleList;
@@ -346,10 +413,10 @@ namespace Inventory1
 			var personalComputer2Date = new DateTime(2009, 11, 6);
 			var personalComputer1 = new PersonalComputer(Guid.NewGuid(), "Made of premium plastic",
 				personalComputer1Date, 24, 15000,
-				"Asus", true, "Linux", true);
+				Manufacturer.Asus, true, OperatingSystem.Linux, true);
 			var personalComputer2 = new PersonalComputer(Guid.NewGuid(), "Brand new watercooling housing system",
 				personalComputer2Date,
-				12, 11132.123, "Intel", true, "Windows", false);
+				12, 11132.123, Manufacturer.Intel, true, OperatingSystem.Windows, false);
 			personalComputerList.Add(personalComputer1);
 			personalComputerList.Add(personalComputer2);
 			return personalComputerList;
@@ -371,6 +438,7 @@ namespace Inventory1
 			Console.WriteLine("9. Search through mobile phone inventory with desired warranty expire year");
 			Console.WriteLine("10. Print all vehicles which registration expires in next month");
 		}
+		
 	}
 }
 	

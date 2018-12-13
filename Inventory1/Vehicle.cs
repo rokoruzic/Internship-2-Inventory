@@ -10,7 +10,7 @@ namespace Inventory1
 		public double KilometresPassed { get; set; }
 		public DateTime RegistrationExpireDate { get; set; }
 		public Vehicle(Guid serialNumber, string description, DateTime dateOfPurchase,
-			int warrantyInMonths, double priceWhenBought, string manufacturer,
+			int warrantyInMonths, double priceWhenBought, Manufacturer manufacturer,
 			DateTime registrationExpireDate, double kilometresPassed) : base ( serialNumber,description,dateOfPurchase,
 			warrantyInMonths,priceWhenBought,manufacturer)
 		{

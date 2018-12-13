@@ -12,9 +12,9 @@ namespace Inventory1
 		public DateTime DateOfPurchase { get; set; }
 		public int WarrantyInMonths { get; set; }
 		public double PriceWhenBought { get; set; }
-		public string Manufacturer { get; set; }
+		public  Manufacturer Manufacturer { get; set; }
 		public InventoryItem(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyInMonths,
-			double priceWhenBought, string manufacturer)
+			double priceWhenBought, Manufacturer manufacturer)
 		{
 			SerialNumber = serialNumber;
 			Description = description;

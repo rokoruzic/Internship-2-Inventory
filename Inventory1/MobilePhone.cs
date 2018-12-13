@@ -9,7 +9,7 @@ namespace Inventory1
 		public string MobileNumber { get; set; }
 		public string OwnerName { get; set; }
 		public MobilePhone(Guid serialNumber, string description, DateTime dateOfPurchase, int warrantyInMonths,
-			double priceWhenBought, string manufacturer, bool batteries, string mobileNumber, string ownerName)
+			double priceWhenBought, Manufacturer manufacturer, bool batteries, string mobileNumber, string ownerName)
 			: base(serialNumber, description,
 				dateOfPurchase,
 				warrantyInMonths, priceWhenBought, manufacturer, batteries)
