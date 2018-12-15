@@ -12,9 +12,9 @@ namespace Inventory1
 		Intel,
 		Alcatel,
 		Samsung,
-		LG,
+		Lg,
 		Toshiba,
-		HP,
+		Hp,
 		Dell,
 		Nokia,
 		Renault
